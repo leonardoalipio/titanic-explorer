@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitanicExplorer.Api", "Api\TitanicExplorer.Api.csproj", "{A76EFE3B-D5E3-4487-BD5E-9CEB6334BC09}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitanicExplorer.Data", "Data\TitanicExplorer.Data.csproj", "{201AFE01-9864-4E82-9727-B41AB39DA566}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TitanicExplorer.Business", "Business\TitanicExplorer.Business.csproj", "{D44497A3-913F-428C-A0AA-8DBAA2DC88F5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A76EFE3B-D5E3-4487-BD5E-9CEB6334BC09}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A76EFE3B-D5E3-4487-BD5E-9CEB6334BC09}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A76EFE3B-D5E3-4487-BD5E-9CEB6334BC09}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A76EFE3B-D5E3-4487-BD5E-9CEB6334BC09}.Release|Any CPU.Build.0 = Release|Any CPU
+		{201AFE01-9864-4E82-9727-B41AB39DA566}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{201AFE01-9864-4E82-9727-B41AB39DA566}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{201AFE01-9864-4E82-9727-B41AB39DA566}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{201AFE01-9864-4E82-9727-B41AB39DA566}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D44497A3-913F-428C-A0AA-8DBAA2DC88F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D44497A3-913F-428C-A0AA-8DBAA2DC88F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D44497A3-913F-428C-A0AA-8DBAA2DC88F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D44497A3-913F-428C-A0AA-8DBAA2DC88F5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
