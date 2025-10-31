@@ -2,18 +2,21 @@ import { useEffect, useState } from "react";
 import PassengerRow from "./PassengerRow";
 
 const PassengerList = () => {
+  
   const [passengers, setPassengers] = useState([])
-
-  const getPassengers = async () => {
-    await fetch('http://127.0.0.1:5012/passengers')
-        .then(response => response.json())
-        .then(data => setPassengers(data))
-        .catch(error => console.error('Error fetching passenger data:', error));
-  }
-
+  
   useEffect(() => {
-    getPassengers();
-  }, []);
+    const fetchPassengers = async () => {
+      try {
+        const response = await fetch("http://127.0.0.1:5012/passengers");
+        const data = await response.json();
+        setPassengers(data);
+      } catch (error) {
+        console.error("Error fetching passengers:", error);
+      }
+    }
+    fetchPassengers();
+  }, [])
 
   return (
     <div className="row g-5">
@@ -21,7 +24,8 @@ const PassengerList = () => {
         <h3 className="pb-4 mb-4 fst-italic border-bottom">List of Passengers of RMS Titanic</h3>
         <article className="blog-post">
             
-            <p>And don't forget about tables in these posts:</p>
+            <p>Select any filter to see passengers:</p>
+
             <table className="table">
               <thead>
                 <tr>
@@ -39,7 +43,6 @@ const PassengerList = () => {
                 {passengers.map(passenger => 
                   <PassengerRow key={passenger.id} passenger={passenger} />
                 )}
-                
               </tbody>
             </table>
             <p>

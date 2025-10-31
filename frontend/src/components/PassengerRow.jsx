@@ -1,14 +1,14 @@
 const PassengerRow = ({ passenger }) => {
   return (
     <tr>
-    <td>{passenger.survived}</td>
-    <td>{passenger.pclass}</td>
-    <td>{passenger.name}</td>
-    <td>{passenger.sex}</td>
-    <td>{passenger.age}</td>
-    <td>{passenger.sibSp}</td>
-    <td>{passenger.parch}</td>
-    <td>{passenger.fare}</td>
+        <td className="text-left">{passenger.survived == true ? "Yes" : "No"}</td>
+        <td className="text-left">{passenger.pclass}</td>
+        <td className="text-left">{passenger.name}</td>
+        <td className="text-left">{passenger.sex}</td>
+        <td className="text-left">{passenger.age}</td>
+        <td className="text-left">{passenger.sibSp}</td>
+        <td className="text-left">{passenger.parch}</td>
+        <td className="text-left">{passenger.fare}</td>
     </tr>
   );
 }
