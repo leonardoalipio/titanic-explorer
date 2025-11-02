@@ -17,7 +17,7 @@ public class CsvLoader
             var passenger = new Passenger
             {
                 Pclass = int.Parse(fields[0]),
-                Survived = fields[1] == "1",
+                Survived = fields[1] == "1" ? 1 : 0,
                 Name = fields[2],
                 Sex = fields[3] == "male" ? ESex.Male : ESex.Female,
                 Age = int.TryParse(fields[4], out var ageVal) ? ageVal : 0,

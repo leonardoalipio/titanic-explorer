@@ -3,7 +3,7 @@ namespace TitanicExplorer.Business;
 public class Passenger
 {
     public int Pclass { get; set; }
-    public bool Survived { get; set; }
+    public int Survived { get; set; }
     public string Name { get; set; } = string.Empty;
     public ESex Sex { get; set; }
     public int Age { get; set; }
