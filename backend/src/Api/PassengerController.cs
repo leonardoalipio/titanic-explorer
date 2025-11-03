@@ -34,53 +34,53 @@ namespace TitanicExplorer.Api
 
             if (search.Survived != null)
             {
-                var survivedValue = Expression.Constant(search.Survived.Value);
-                var passengerSurvived = Expression.Property(passengerParameter, "Survived");
-                currentExpression = Expression.Equal(passengerSurvived, survivedValue);
+                currentExpression = CreateExpression(
+                    search.Survived.Value,
+                    currentExpression,
+                    "Survived",
+                    passengerParameter
+                );
             }
 
             if (search.Class != null)
             {
-                var PclassValue = Expression.Constant(search.Class.Value);
-                var passengerPclass = Expression.Property(passengerParameter, "Pclass");
-                var PclassEquals = Expression.Equal(passengerPclass, PclassValue);
-                if (currentExpression == null)
-                    currentExpression = PclassEquals;
-                else
-                    currentExpression = Expression.And(currentExpression, PclassEquals);
+                currentExpression = CreateExpression(
+                    search.Class.Value,
+                    currentExpression,
+                    "Pclass",
+                    passengerParameter
+                );
             }
 
             if (search.ESex != null)
             {
-                var sexValue = Expression.Constant(search.ESex.Value);
-                var passengerSex = Expression.Property(passengerParameter, "Sex");
-                var sexEquals = Expression.Equal(passengerSex, sexValue);
-                if (currentExpression == null)
-                    currentExpression = sexEquals;
-                else
-                    currentExpression = Expression.And(currentExpression, sexEquals);
+                currentExpression = CreateExpression(
+                    search.ESex.Value,
+                    currentExpression,
+                    "Sex",
+                    passengerParameter
+                );
             }
 
             if (search.Age != null)
             {
-                var ageValue = Expression.Constant(search.Age.Value);
-                var passengerAge = Expression.Property(passengerParameter, "Age");
-                var ageEquals = Expression.Equal(passengerAge, ageValue);
-                if (currentExpression == null)
-                    currentExpression = ageEquals;
-                else
-                    currentExpression = Expression.And(currentExpression, ageEquals);
+                currentExpression = CreateExpression(
+                    search.Age.Value,
+                    currentExpression,
+                    "Age",
+                    passengerParameter
+                );
             }
 
             if (search.Fare != null)
             {
-                var fareValue = Expression.Constant(search.Fare.Value);
-                var passengerFare = Expression.Property(passengerParameter, "Fare");
-                var fareEquals = Expression.Equal(passengerFare, fareValue);
-                if (currentExpression == null)
-                    currentExpression = fareEquals;
-                else
-                    currentExpression = Expression.And(currentExpression, fareEquals);
+                currentExpression = CreateExpression(
+                    search.Fare.Value,
+                    currentExpression,
+                    "Fare",
+                    passengerParameter,
+                    ">"
+                );
             }
 
             if (currentExpression != null)
@@ -92,6 +92,43 @@ namespace TitanicExplorer.Api
             }
 
             return passengers;
+        }
+
+        private static Expression CreateExpression<T>(
+            T value,
+            Expression? currentExpression,
+            string propertyName,
+            ParameterExpression objectParameter,
+            string operatorType = "=")
+        {
+            var constant = Expression.Constant(value);
+            var property = Expression.Property(objectParameter, propertyName);
+            Expression operatorExpression;
+            switch (operatorType)
+            {
+                case ">":
+                    operatorExpression = Expression.GreaterThan(property, constant);
+                    break;
+                case "<":
+                    operatorExpression = Expression.LessThan(property, constant);
+                    break;
+                case ">=":
+                    operatorExpression = Expression.GreaterThanOrEqual(property, constant);
+                    break;
+                case "<=":
+                    operatorExpression = Expression.LessThanOrEqual(property, constant);
+                    break;
+                default:
+                    operatorExpression = Expression.Equal(property, constant);
+                    break;
+            }
+
+            if (currentExpression == null)
+                currentExpression = operatorExpression;
+            else
+                currentExpression = Expression.And(currentExpression, operatorExpression);
+
+            return currentExpression;
         }
 
         public static ESex? ParseSex(int? value)

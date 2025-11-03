@@ -9,6 +9,6 @@ namespace TitanicExplorer.Api
         public int? Sex { get; set; }
         public ESex? ESex { get; set; }
         public int? Age { get; set; }
-        public int? Fare { get; set; }
+        public decimal? Fare { get; set; }
     }
 }

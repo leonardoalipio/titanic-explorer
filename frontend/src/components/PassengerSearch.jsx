@@ -13,7 +13,7 @@ const PassengerSearch = ({setPassengers}) => {
 
     const change = ((e) => setForm({
         ...form,
-        [e.target.name]: parseInt(e.target.value),
+        [e.target.name]: e.target.value != "" ? parseInt(e.target.value) : null,
     }))
 
     const searchPassengers = async (e) => {
@@ -69,14 +69,14 @@ const PassengerSearch = ({setPassengers}) => {
                 <div className="form-group col">
                     <label htmlFor="age" className="form-label">Age</label>
                     <input name="age" className="form-control" placeholder="Age" type="text" 
-                    value={form.Age} 
+                    value={form.age} 
                     onChange={change} />
                 </div>
 
                 <div className="form-group col">
                     <label htmlFor="fare" className="form-label">Maximum Fare</label>
                     <input name="fare" className="form-control" placeholder="fare" type="text" 
-                    value={form.Fare} 
+                    value={form.fare} 
                     onChange={change} />
                 </div>
             </div>
