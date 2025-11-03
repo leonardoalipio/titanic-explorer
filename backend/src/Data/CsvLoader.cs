@@ -5,7 +5,7 @@ namespace TitanicExplorer.Data;
 
 public class CsvLoader
 {
-    public static List<Passenger> LoadPassengers(string filePath)
+    public static IEnumerable<Passenger> LoadPassengers(string filePath)
     {
         var passengers = new List<Passenger>();
         var lines = File.ReadAllLines(filePath);

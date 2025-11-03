@@ -2,6 +2,8 @@ import PassengerRow from "./PassengerRow";
 
 const PassengerList = ({ passengers }) => {
   return (
+    <>
+      <h3 className="pb-4 mb-4 fst-italic">Total of passengers: {passengers.length}</h3>
       <article className="blog-post">
         <table className="table">
           <thead>
@@ -28,7 +30,7 @@ const PassengerList = ({ passengers }) => {
           used throughout.
         </p>
       </article>
-
+</>
   );
 }
 

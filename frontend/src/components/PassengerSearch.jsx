@@ -1,11 +1,11 @@
 import { useState } from "react"
 
 const initialFormSearch = {
-    Survived: null,
-    Class: null,
-    Sex: null,
-    Age: null,
-    Fare: null,
+    survived: null,
+    class: null,
+    sex: null,
+    age: null,
+    fare: null,
 }
 
 const PassengerSearch = ({setPassengers}) => {
@@ -18,17 +18,19 @@ const PassengerSearch = ({setPassengers}) => {
 
     const searchPassengers = async (e) => {
         e.preventDefault();
-        fetch("http://127.0.0.1:5012/search-passengers", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(form),
-        })
-        .then((response) => response.json())
-        .then((data) => {
+        try {
+            var response = await fetch("http://127.0.0.1:5012/search-passengers", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(form),
+            })
+            var data = await response.json()
             setPassengers(data);
-        });
+        } catch (error) {
+            new Error("Error searching passengers: " + error.message);
+        }
     }
 
     return (
@@ -37,7 +39,7 @@ const PassengerSearch = ({setPassengers}) => {
                 <div className="form-group col">
                     <label htmlFor="age" className="form-label">Survived?</label>
                     <select name="survived" className="form-control"
-                        onChange={(e) => setForm({...form, [e.target.name]: parseInt(e.target.value)})}>
+                        onChange={change}>
                         <option value=""></option>
                         <option value="1">Survived</option>
                         <option value="0">Perished</option>
@@ -46,7 +48,7 @@ const PassengerSearch = ({setPassengers}) => {
                 <div className="form-group col">
                     <label htmlFor="age" className="form-label">PClas</label>
                     <select name="class" className="form-control"
-                        onChange={(e) => setForm({...form, [e.target.name]: parseInt(e.target.value)})}>
+                        onChange={change}>
                         <option value=""></option>
                         <option value="1">1</option>
                         <option value="2">2</option>
@@ -57,7 +59,7 @@ const PassengerSearch = ({setPassengers}) => {
                 <div className="form-group col">
                     <label htmlFor="sex" className="form-label">Sex</label>
                     <select name="sex" className="form-control"
-                        onChange={(e) => setForm({...form, [e.target.name]: parseInt(e.target.value)})}>
+                        onChange={change}>
                         <option value=""></option>
                         <option value="0">Male</option>
                         <option value="1">Female</option>
