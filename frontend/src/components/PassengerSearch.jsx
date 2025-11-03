@@ -1,15 +1,13 @@
 import { useState } from "react"
 
-const initialFormSearch = {
-    survived: null,
-    class: null,
-    sex: null,
-    age: null,
-    fare: null,
-}
-
 const PassengerSearch = ({setPassengers}) => {
-    const [form, setForm] = useState(initialFormSearch)
+    const [form, setForm] = useState({
+        survived: null,
+        class: null,
+        sex: null,
+        age: null,
+        fare: null,
+    })
 
     const change = ((e) => setForm({
         ...form,
@@ -69,14 +67,14 @@ const PassengerSearch = ({setPassengers}) => {
                 <div className="form-group col">
                     <label htmlFor="age" className="form-label">Age</label>
                     <input name="age" className="form-control" placeholder="Age" type="text" 
-                    value={form.age} 
+                    value={form.age == null ? "" : form.age} 
                     onChange={change} />
                 </div>
 
                 <div className="form-group col">
                     <label htmlFor="fare" className="form-label">Maximum Fare</label>
-                    <input name="fare" className="form-control" placeholder="fare" type="text" 
-                    value={form.fare} 
+                    <input name="fare" className="form-control" placeholder="Fare" type="text" 
+                    value={form.fare == null ? "" : form.fare} 
                     onChange={change} />
                 </div>
             </div>

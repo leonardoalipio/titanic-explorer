@@ -1,4 +1,5 @@
 using System.Linq.Expressions;
+using AgileObjects.ReadableExpressions;
 using Microsoft.AspNetCore.Mvc;
 using TitanicExplorer.Business;
 
@@ -34,59 +35,34 @@ namespace TitanicExplorer.Api
 
             if (search.Survived != null)
             {
-                currentExpression = CreateExpression(
-                    search.Survived.Value,
-                    currentExpression,
-                    "Survived",
-                    passengerParameter
-                );
+                currentExpression = CreateExpression(search.Survived.Value, currentExpression, "Survived", passengerParameter);
             }
 
             if (search.Class != null)
             {
-                currentExpression = CreateExpression(
-                    search.Class.Value,
-                    currentExpression,
-                    "Pclass",
-                    passengerParameter
-                );
+                currentExpression = CreateExpression(search.Class.Value, currentExpression, "Pclass", passengerParameter);
             }
 
             if (search.ESex != null)
             {
-                currentExpression = CreateExpression(
-                    search.ESex.Value,
-                    currentExpression,
-                    "Sex",
-                    passengerParameter
-                );
+                currentExpression = CreateExpression(search.ESex.Value, currentExpression, "Sex", passengerParameter);
             }
 
             if (search.Age != null)
             {
-                currentExpression = CreateExpression(
-                    search.Age.Value,
-                    currentExpression,
-                    "Age",
-                    passengerParameter
-                );
+                currentExpression = CreateExpression(search.Age.Value, currentExpression, "Age", passengerParameter);
             }
 
             if (search.Fare != null)
             {
-                currentExpression = CreateExpression(
-                    search.Fare.Value,
-                    currentExpression,
-                    "Fare",
-                    passengerParameter,
-                    ">"
-                );
+                currentExpression = CreateExpression(search.Fare.Value, currentExpression, "Fare", passengerParameter, ">");
             }
 
             if (currentExpression != null)
             {
-                var expression = Expression.Lambda<Func<Passenger, bool>>(
-                    currentExpression, false, new List<ParameterExpression> { passengerParameter });
+                var expression = Expression.Lambda<Func<Passenger, bool>>(currentExpression, false, new List<ParameterExpression> { passengerParameter });
+                var query = expression.ToReadableString();
+
                 var func = expression.Compile();
                 passengers = passengers.Where(func);
             }
