@@ -2,12 +2,14 @@ version: '3.8'
 
 services:
   api:
+    image: titanic-explorer-api:latest
     build:
-      context: ../backend
-      dockerfile: Dockerfile
+      context: ../backend/src
+      dockerfile: ./Api/Dockerfile
     container_name: api
     ports:
       - "5000:8080"
+      - "5001:8081"
     environment:
       - ASPNETCORE_ENVIRONMENT=Production
       - ASPNETCORE_URLS=http://+:8080
@@ -17,7 +19,7 @@ services:
 
   frontend:
     build:
-      context: ./frontend
+      context: ../frontend
       dockerfile: Dockerfile
     container_name: frontend
     ports:
